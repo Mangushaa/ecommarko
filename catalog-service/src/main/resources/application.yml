@@ -1,0 +1,54 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: catalog-service
+    sleuth:
+      sampler:
+        probability=1:
+  zipkin:
+    enabled: true
+    baseUrl: ${ZIPKIN_URL:http://localhost:9411/}
+    tracing:
+      endpoint: ${ZIPKIN_URL:http://localhost:9411/}
+    service-name: catalog-service
+    locator:
+      discovery:
+        enabled=true:
+    data:
+      mongodb:
+        uri: ${MONGO_URL:mongodb+srv://admin:admin@cluster0.rsayy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0}
+        database: products
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics, prometheus
+  metrics:
+    enable:
+      all: true
+  endpoint:
+    health:
+      show-details: always
+  tracing:
+    enabled: true
+    sampling:
+      probability: 1.0
+    zipkin:
+      endpoint: ${ZIPKIN_URL:http://localhost:9411/api/v2/spans}
+  zipkin:
+    enabled: true
+    baseUrl: ${ZIPKIN_URL:http://localhost:9411/api/v2/spans}
+    tracing:
+      endpoint: ${ZIPKIN_URL:http://localhost:9411/api/v2/spans}
+    service-name: catalog-service
+
+#logging:
+#  level:
+#    root: DEBUG
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka/}`

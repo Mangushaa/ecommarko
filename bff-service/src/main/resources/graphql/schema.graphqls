@@ -1,0 +1,31 @@
+type Query {
+    products(category: String!): [Product!]
+}
+
+#type Mutation {
+#    addProduct(cartGuid: String!, addToCartInput: AddToCartInput): Cart
+#}
+
+type Cart {
+    guid: String!
+    entries: [CartEntry!]
+}
+
+type CartEntry {
+    entryNumber: Int!
+    product: Product!
+    quantity: Int!
+}
+
+type Product {
+    sku: String!
+    name: String!
+    price: Float!
+    category: String!
+    stock: Int!
+}
+
+input AddToCartInput {
+    sku: String!
+    quantity: Int!
+}
