@@ -28,9 +28,6 @@ jobs:
           cd catalog-service
           mvn clean package
 
-      - name: Upload Surefire Test Reports
-        if: always()  # Ensures upload even if tests fail
-        uses: actions/upload-artifact@v3
-        with:
-          name: surefire-reports
-          path: target/surefire-reports/
+      - name: Publish Test Report
+        if: success() || failure()
+        uses: scacap/action-surefire-report@v1
