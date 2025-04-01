@@ -3,7 +3,7 @@ on:
     branches: [ master ]
     paths:
       - 'catalog-service/**'
-      - '.github/workflows/ci.yml'
+      - '.github/workflows/hello.yml'
 
 jobs:
   build-catalog-service:
