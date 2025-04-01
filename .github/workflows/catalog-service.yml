@@ -8,7 +8,7 @@ on:
 permissions:
   checks: write
   pull-requests: write
-
+  packages: write
 
 jobs:
   test-job:
@@ -28,7 +28,7 @@ jobs:
           java-version: 17
           distribution: 'temurin'
 
-      - name: Run Tests with Surefire
+      - name: Package artifact
         run: |
           cd catalog-service
           mvn clean package
@@ -36,3 +36,11 @@ jobs:
       - name: Publish Test Report
         if: success() || failure()
         uses: scacap/action-surefire-report@v1
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          file: ./Dockerfile
+          registry: https://ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
