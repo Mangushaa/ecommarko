@@ -3,7 +3,7 @@ on:
     branches: [ master ]
     paths:
       - 'catalog-service/**'
-      - '.github/workflows/hello.yml'
+      - '.github/workflows/catalog-service.yml'
 
 jobs:
   test-job:
@@ -14,7 +14,6 @@ jobs:
         run:
           echo ${{ github.event.head_commit.modified }}
   build-catalog-service:
-    if: contains(github.event.head_commit.modified, 'catalog-service/**')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
