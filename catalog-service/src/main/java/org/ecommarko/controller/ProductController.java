@@ -47,6 +47,7 @@ public class ProductController {
     @ExceptionHandler(ProductNotFoundException.class)
     public ResponseEntity<ErrorDto> handleProductNotFoundException(ProductNotFoundException ex) {
         ErrorDto errorDto = new ErrorDto();
+        System.out.println("changes");
         errorDto.setCode("1");
         errorDto.setMessage("Product with id %s not found!".formatted(ex.getProductId()));
         return ResponseEntity.badRequest().body(errorDto);

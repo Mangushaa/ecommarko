@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-catalog-service:
-    if: contains(github.event.head_commit.modified, 'catalog-service/')
+    if: contains(github.event.head_commit.modified, 'catalog-service/**')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
