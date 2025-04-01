@@ -12,7 +12,7 @@ permissions:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: catalog-service
+  IMAGE_NAME: ${{ github.repository }}/catalog-service
 
 jobs:
   build-catalog-service:
@@ -24,7 +24,6 @@ jobs:
         with:
           java-version: 17
           distribution: 'temurin'
-          cache: 'maven'
 
       - name: Package artifact
         run: |
