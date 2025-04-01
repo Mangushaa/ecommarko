@@ -8,5 +8,4 @@ COPY --from=build /catalog-service.jar /catalog-service.jar
 
 EXPOSE 8080
 
-# 6. Запускаємо
 ENTRYPOINT ["java", "-jar", "/catalog-service.jar"]
