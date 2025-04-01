@@ -5,6 +5,11 @@ on:
       - 'catalog-service/**'
       - '.github/workflows/catalog-service.yml'
 
+permissions:
+  checks: write
+  pull-requests: write
+
+
 jobs:
   test-job:
     runs-on: ubuntu-latest
