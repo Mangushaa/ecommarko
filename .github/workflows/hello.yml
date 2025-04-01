@@ -1,13 +1,30 @@
 on:
   push:
     branches: [ master ]
+    paths:
+      - 'catalog-service/**'
+      - '.github/workflows/ci.yml'
 
 jobs:
-  build:
-
+  build-catalog-service:
+    if: contains(github.event.head_commit.modified, 'catalog-service/')
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
-      - name: Build with Maven
-        run: echo Hello, world
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: 17
+          distribution: 'temurin'
+      
+      - name: Run Tests with Surefire
+        run: |
+          cd catalog-service
+          mvn clean test
+
+      - name: Upload Surefire Test Reports
+        if: always()  # Ensures upload even if tests fail
+        uses: actions/upload-artifact@v3
+        with:
+          name: surefire-reports
+          path: target/surefire-reports/
